@@ -16,7 +16,7 @@ class AgeCheckerUnder18
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->age && $request->age < 18) {
-            return redirect('/admin/no-permission');
+            return redirect('/no-permission');
         }
         return $next($request);
     }

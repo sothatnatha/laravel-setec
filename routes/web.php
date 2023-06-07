@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\NotFoundController;
 use App\Http\Controllers\ProductController;
+use App\Http\Middleware\AgeCheckerUnder18;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +68,6 @@ Route::get('/', function () {
 // Route::get('/articles/{id?}/edit', [ArticleController::class, 'edit']);
 
 // Article Routes
-Route::resource('admin/articles', ArticleController::class);
 
 // Route::get('/admin/articles/create', function () {
 //     return view('admin.articles.create');
@@ -83,32 +83,20 @@ Route::get('/admin/delarticle/deleteforever/{id}', [ArticleController::class, 'd
 
 
 // Not allowed route
-Route::view('admin/no-permission/', 'admin.no-permission');
+Route::view('no-permission/', 'admin.no-permission');
+
+
+// Group route middleware
+// Allow user age greater than 18 for allow to access this page
+Route::group([ 'middleware' => ['agecheckerunder18'] ], function() {
+    Route::resource('admin/articles', ArticleController::class);
+    Route::resource('admin/employees', EmployeesController::class);
+    Route::resource('admin/categories', CategoryController::class);
+});
 
 
 
 
-
-
-
-
-// ----------------------------------------------------------------
-// Employee routes
-Route::resource('admin/employees', EmployeesController::class);
-
-// ----------------------------------------------------------------
-// Product routes
-// Route::resource('/products', ProductController::class);
-
-
-
-// Category routes
-// Route::get('/admin/categories', function () {
-//     return view('admin.categories.index');
-// });
-
-
-Route::resource('admin/categories', CategoryController::class);
 
 
 
