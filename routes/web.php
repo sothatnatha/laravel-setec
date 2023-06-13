@@ -42,9 +42,9 @@ Route::get('/', function () {
 // })->where(['id'=>'[0-9]*', 'name'=>'[a-zA-Z0-9 ]*']);
 
 //  using compact
-Route::get('/products/{id?}/{name?}', function ($id=null, $name=null) {
-    return view('product',compact('id', 'name'));
-})->where(['id'=>'[0-9]*', 'name'=>'[a-zA-Z0-9 ]*']);
+Route::get('/products/{id?}/{name?}', function ($id = null, $name = null) {
+    return view('product', compact('id', 'name'));
+})->where(['id' => '[0-9]*', 'name' => '[a-zA-Z0-9 ]*']);
 
 Route::get('/service', function () {
     return view('service');
@@ -81,26 +81,23 @@ Route::get('/admin/delarticle/deleteforever/{id}', [ArticleController::class, 'd
 
 
 
-
 // Not allowed route
 Route::view('no-permission/', 'admin.no-permission');
 
 
 // Group route middleware
 // Allow user age greater than 18 for allow to access this page
-Route::group([ 'middleware' => ['agecheckerunder18'] ], function() {
-    Route::resource('admin/articles', ArticleController::class);
-    Route::resource('admin/employees', EmployeesController::class);
-    Route::resource('admin/categories', CategoryController::class);
-});
+// Route::group(['middleware' => ['agecheckerunder18']], function () {
+//     Route::resource('admin/articles', ArticleController::class);
+//     Route::resource('admin/employees', EmployeesController::class);
+//     Route::resource('admin/categories', CategoryController::class);
+// });
 
 
-
-
-
-
-
-
+Route::resource('admin/articles', ArticleController::class)
+    ->middleware("age.checker.isunder18");
+Route::resource('admin/employees', EmployeesController::class);
+Route::resource('admin/categories', CategoryController::class);
 
 
 
