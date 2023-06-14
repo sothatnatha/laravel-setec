@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Rules\AgeCheckerRule;
 use App\Rules\WebsiteChecker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ArticleController extends Controller
 {
@@ -190,4 +191,39 @@ class ArticleController extends Controller
         return redirect('/admin/article/trash')
             ->with('del-forever-success-message', 'Article deleted successfully!');
     }
+
+
+    // Create session for user.
+    public function createUserSession(Request $req) {
+        // $req->session()->put('user', 'Sothatna Tha');
+        // session()->put('user', 'Sothatna Tha');
+
+        // Use session class
+
+        // Session::put('user', "Test User");
+        Session::flash('user', "User2");
+        
+        
+    }
+
+    public function useSession(Request $req) {
+        // if($req->session()->has('user')) {
+        //     dd($req->session()->get('user'));
+        // // return $req->session()->get('user');
+        // }
+
+        if(session()->has('user')) {
+            dd(session()->get('user'));
+        // return $req->session()->get('user');
+        }
+
+    }
+
+    public function deleteUserSession(Request $req) {
+        // $req->session()->pull('user');
+        session()->pull('user');
+        // $req->session()->forget('user');
+        // request()->session()->flush() // Delete all session.
+    }
+
 }

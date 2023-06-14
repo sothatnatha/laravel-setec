@@ -102,4 +102,14 @@ Route::resource('admin/categories', CategoryController::class);
 
 
 // not found route
-Route::any('{catchall}', [NotFoundController::class, 'notfound'])->where('catchall', '.*');
+// Route::any('{catchall}', [NotFoundController::class, 'notfound'])->where('catchall', '.*');
+
+
+
+
+// User session route
+Route::get('/session/user/create', [ArticleController::class, 'createUserSession']);
+Route::get('/session/user/show', [ArticleController::class, 'useSession']);
+Route::get('/session/user/delete', [ArticleController::class, 'deleteUserSession']);
+
+
