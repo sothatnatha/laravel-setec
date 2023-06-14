@@ -94,8 +94,8 @@ Route::view('no-permission/', 'admin.no-permission');
 // });
 
 
-Route::resource('admin/articles', ArticleController::class)
-    ->middleware("age.checker.isunder18");
+Route::resource('admin/articles', ArticleController::class);
+// ->middleware("age.checker.isunder18");
 Route::resource('admin/employees', EmployeesController::class);
 Route::resource('admin/categories', CategoryController::class);
 
@@ -111,5 +111,3 @@ Route::resource('admin/categories', CategoryController::class);
 Route::get('/session/user/create', [ArticleController::class, 'createUserSession']);
 Route::get('/session/user/show', [ArticleController::class, 'useSession']);
 Route::get('/session/user/delete', [ArticleController::class, 'deleteUserSession']);
-
-

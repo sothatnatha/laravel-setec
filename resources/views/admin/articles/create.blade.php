@@ -50,8 +50,6 @@
 
 <form action="/admin/articles" method="POST" autocomplete="off">
     @csrf
-    {{-- cross site request fogery --}}
-
     {{ method_field('POST') }}
 
     <div class="form-group">
@@ -73,12 +71,12 @@
                 <p class="error-fields">{{$message}}</p>
             @enderror
         </div>  -->
-    <div class="form-group">
+    <!-- <div class="form-group">
         <input type="text" name="age" id="txtAge" value="{{old('age')}}" class="form-control" placeholder="Enter age" />
         @error('age')
         <p class="error-fields">{{$message}}</p>
         @enderror
-    </div>
+    </div> -->
     <!-- <div class="form-group">
             <input
                 type="text"

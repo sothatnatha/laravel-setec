@@ -40,17 +40,19 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($request->all());
         $request->validate([
             'title' => 'required|min:5|max:2000',
             'description' => 'required|min:5|max:5000',
-            'email' => 'required|email|regex:/.+@.+\..+/iu',
-            'url' => ['required', 'url', new WebsiteChecker],
-            'newsId' => 'numeric',
-            'age' => ['required', 'numeric', new AgeCheckerRule]
+            // 'email' => 'required|email|regex:/.+@.+\..+/iu',
+            // 'url' => ['required', 'url', new WebsiteChecker],
+            // 'newsId' => 'numeric',
+            // 'age' => ['required', 'numeric', new AgeCheckerRule]
         ], [
             'title.required' => 'You must provide a unique title',
             'title.min' => 'អ្នកត្រូវផ្ដល់នូវចំណងជើងយ៉ាងតិច៥តួអក្សរ!',
-            'email.regex' => 'អ៊ីមែលរបស់អ្នកមិនត្រូវតាមលក្ខណ្ឌ e.g sothatna@gmail.com',
+            // 'email.regex' => 'អ៊ីមែលរបស់អ្នកមិនត្រូវតាមលក្ខណ្ឌ e.g sothatna@gmail.com',
         ]);
 
         Article::create($request->all());
@@ -194,7 +196,8 @@ class ArticleController extends Controller
 
 
     // Create session for user.
-    public function createUserSession(Request $req) {
+    public function createUserSession(Request $req)
+    {
         // $req->session()->put('user', 'Sothatna Tha');
         // session()->put('user', 'Sothatna Tha');
 
@@ -202,28 +205,26 @@ class ArticleController extends Controller
 
         // Session::put('user', "Test User");
         Session::flash('user', "User2");
-        
-        
     }
 
-    public function useSession(Request $req) {
+    public function useSession(Request $req)
+    {
         // if($req->session()->has('user')) {
         //     dd($req->session()->get('user'));
         // // return $req->session()->get('user');
         // }
 
-        if(session()->has('user')) {
+        if (session()->has('user')) {
             dd(session()->get('user'));
-        // return $req->session()->get('user');
+            // return $req->session()->get('user');
         }
-
     }
 
-    public function deleteUserSession(Request $req) {
+    public function deleteUserSession(Request $req)
+    {
         // $req->session()->pull('user');
         session()->pull('user');
         // $req->session()->forget('user');
         // request()->session()->flush() // Delete all session.
     }
-
 }
